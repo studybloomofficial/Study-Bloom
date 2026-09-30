@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Study Bloom 🎀</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Quicksand',sans-serif;
+    color:#743d59;
+
+    background:
+        radial-gradient(circle at 8% 10%,#ffd6e8 0 6%,transparent 7%),
+        radial-gradient(circle at 92% 15%,#ffc5df 0 7%,transparent 8%),
+        radial-gradient(circle at 15% 90%,#ffe1ef 0 8%,transparent 9%),
+        radial-gradient(circle at 88% 85%,#ffd0e5 0 6%,transparent 7%),
+        linear-gradient(135deg,#fffafd,#fff0f7,#ffe7f2,#fff7fb);
+}
+
+/* Floating decorations */
+
+.decoration{
+    position:fixed;
+    pointer-events:none;
+    z-index:0;
+    opacity:.65;
+    animation:float 5s ease-in-out infinite;
+}
+
+.d1{top:8%;left:4%;font-size:30px}
+.d2{top:20%;right:5%;font-size:25px;animation-delay:1s}
+.d3{bottom:15%;left:7%;font-size:24px;animation-delay:2s}
+.d4{bottom:7%;right:8%;font-size:32px;animation-delay:1.5s}
+.d5{top:48%;left:2%;font-size:20px;animation-delay:.5s}
+
+@keyframes float{
+    0%,100%{transform:translateY(0) rotate(-5deg)}
+    50%{transform:translateY(-12px) rotate(5deg)}
+}
+
+.container{
+    position:relative;
+    z-index:1;
+    width:min(1100px,94%);
+    margin:auto;
+    padding:35px 0 60px;
+}
+
+/* Header */
+
+header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo{
+    display:inline-block;
+    padding:9px 20px;
+    border-radius:30px;
+    background:#ffe0ed;
+    border:2px solid #ffc0d9;
+    color:#c14e80;
+    font-weight:700;
+    font-size:14px;
+    box-shadow:0 7px 18px rgba(217,92,143,.12);
+}
+
+h1{
+    font-family:'Baloo 2',cursive;
+    font-size:48px;
+    margin:8px 0 0;
+    color:#c4477b;
+    line-height:1;
+}
+
+.subtitle{
+    margin-top:8px;
+    color:#a45b79;
+    font-size:15px;
+}
+
+/* Cards */
+
+.card{
+    background:rgba(255,250,253,.9);
+    border:2px solid #ffd0e2;
+    border-radius:28px;
+    padding:22px;
+    box-shadow:0 12px 30px rgba(205,84,137,.11);
+    backdrop-filter:blur(8px);
+}
+
+/* Top stats */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:20px;
+}
+
+.stat{
+    border-radius:23px;
+    padding:18px;
+    text-align:center;
+    border:2px solid transparent;
+}
+
+.stat:nth-child(1){
+    background:#ffe0ed;
+    border-color:#ffc2d9;
+}
+
+.stat:nth-child(2){
+    background:#ffd3e6;
+    border-color:#ffb9d5;
+}
+
+.stat:nth-child(3){
+    background:#ffe8f1;
+    border-color:#ffd0e1;
+}
+
+.stat:nth-child(4){
+    background:#ffc8df;
+    border-color:#ffadd0;
+}
+
+.stat-icon{
+    font-size:23px;
+}
+
+.stat-number{
+    font-family:'Baloo 2',cursive;
+    font-size:31px;
+    font-weight:800;
+    color:#bd4879;
+    line-height:1;
+    margin-top:5px;
+}
+
+.stat-label{
+    font-size:12px;
+    margin-top:4px;
+    color:#92516d;
+}
+
+/* Main layout */
+
+.main-grid{
+    display:grid;
+    grid-template-columns:1fr 1.4fr;
+    gap:20px;
+}
+
+/* Subjects */
+
+.section-title{
+    font-family:'Baloo 2',cursive;
+    font-size:23px;
+    color:#bc4778;
+    margin:0 0 13px;
+}
+
+.subjects{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.subject{
+    border:2px solid #ffd0e2;
+    background:#fff7fb;
+    padding:12px 13px;
+    border-radius:19px;
+    cursor:pointer;
+    transition:.2s;
+    text-align:left;
+}
+
+.subject:hover{
+    transform:translateY(-2px);
+    background:#ffeaf3;
+}
+
+.subject.active{
+    background:linear-gradient(135deg,#ffc0dc,#ff9fc9);
+    border-color:#ff86b8;
+    color:white;
+    box-shadow:0 7px 16px rgba(225,81,140,.18);
+}
+
+.subject-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.subject-name{
+    font-weight:700;
+    font-size:14px;
+}
+
+.subject-count{
+    font-family:'Baloo 2',cursive;
+    font-size:22px;
+    font-weight:800;
+}
+
+.subject-bar{
+    height:6px;
+    background:#ffe3ee;
+    border-radius:10px;
+    margin-top:8px;
+    overflow:hidden;
+}
+
+.subject-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#ff9fc9,#f45d9f);
+    border-radius:10px;
+    transition:.3s;
+}
+
+/* Main action */
+
+.action-card{
+    text-align:center;
+}
+
+.selected{
+    display:inline-block;
+    background:#ffe2ee;
+    color:#b44876;
+    padding:7px 15px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.big-count{
+    font-family:'Baloo 2',cursive;
+    font-size:76px;
+    line-height:.9;
+    color:#c24779;
+    font-weight:800;
+    margin:12px 0 3px;
+}
+
+.count-label{
+    color:#9a5874;
+    font-size:13px;
+}
+
+.done-button{
+    margin-top:25px;
+    width:min(430px,100%);
+    height:135px;
+    border:none;
+    border-radius:38px;
+    cursor:pointer;
+
+    background:
+        linear-gradient(135deg,#ffb8d7,#ff91bf 45%,#f76da9);
+
+    color:white;
+    font-family:'Baloo 2',cursive;
+    font-size:30px;
+    font-weight:800;
+
+    box-shadow:
+        0 9px 0 #dc5a91,
+        0 17px 30px rgba(218,82,137,.24);
+
+    transition:.12s;
+}
+
+.done-button:hover{
+    transform:translateY(-3px);
+    filter:saturate(1.08);
+}
+
+.done-button:active{
+    transform:translateY(7px);
+    box-shadow:
+        0 2px 0 #dc5a91,
+        0 7px 15px rgba(218,82,137,.2);
+}
+
+.button-small{
+    display:block;
+    font-family:'Quicksand',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    margin-top:-3px;
+    opacity:.9;
+}
+
+/* Goal */
+
+.goal{
+    margin-top:22px;
+}
+
+.goal-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.progress{
+    height:15px;
+    background:#ffe1ed;
+    border-radius:20px;
+    overflow:hidden;
+    border:2px solid #ffd0e1;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    border-radius:20px;
+    background:linear-gradient(90deg,#ffd0e3,#ff9fc9,#f45d9f);
+    transition:.4s;
+}
+
+/* Buttons */
+
+.button-row{
+    display:flex;
+    justify-content:center;
+    gap:9px;
+    margin-top:18px;
+    flex-wrap:wrap;
+}
+
+.small-button{
+    border:none;
+    border:2px solid #ffc4db;
+    background:#ffe9f2;
+    color:#a94671;
+    padding:9px 15px;
+    border-radius:17px;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.small-button:hover{
+    background:#ffd6e7;
+    transform:translateY(-2px);
+}
+
+/* Bottom section */
+
+.bottom{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* History */
+
+.history{
+    max-height:270px;
+    overflow:auto;
+}
+
+.history-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#fff0f6;
+    border:1px solid #ffd3e4;
+    padding:10px 13px;
+    border-radius:16px;
+    margin-bottom:8px;
+}
+
+.history-date{
+    font-size:12px;
+    color:#966078;
+}
+
+.history-number{
+    font-family:'Baloo 2',cursive;
+    color:#c14a7c;
+    font-size:20px;
+}
+
+/* Reset */
+
+.reset-box{
+    margin-top:20px;
+    padding:20px;
+    border-radius:25px;
+    background:linear-gradient(135deg,#fff5fa,#ffe3ef);
+    border:2px solid #ffc5dc;
+}
+
+.reset-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.reset-subject{
+    border:1px solid #f3b2ce;
+    background:#ffdce9;
+    color:#a94370;
+    padding:8px 12px;
+    border-radius:15px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.reset-subject:hover{
+    background:#ffc9df;
+}
+
+/* Toast */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:30px;
+    transform:translate(-50%,120px);
+    opacity:0;
+    background:#c94d80;
+    color:white;
+    padding:12px 22px;
+    border-radius:25px;
+    font-weight:700;
+    z-index:20;
+    box-shadow:0 10px 25px rgba(185,62,112,.25);
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translate(-50%,0);
+    opacity:1;
+}
+
+/* Floating +1 */
+
+.float{
+    position:fixed;
+    pointer-events:none;
+    color:#e84e94;
+    font-family:'Baloo 2',cursive;
+    font-size:27px;
+    font-weight:800;
+    z-index:30;
+    animation:floatUp 900ms ease-out forwards;
+}
+
+@keyframes floatUp{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-100px) scale(1.25);
+    }
+}
+
+/* Sparkles */
+
+.sparkle{
+    position:fixed;
+    pointer-events:none;
+    z-index:30;
+    animation:sparkle 800ms ease-out forwards;
+}
+
+@keyframes sparkle{
+    0%{
+        opacity:1;
+        transform:scale(.4) rotate(0);
+    }
+    100%{
+        opacity:0;
+        transform:scale(1.4) rotate(90deg) translateY(-50px);
+    }
+}
+
+/* Mobile */
+
+@media(max-width:800px){
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .main-grid,
+    .bottom{
+        grid-template-columns:1fr;
+    }
+
+    h1{
+        font-size:40px;
+    }
+
+    .big-count{
+        font-size:65px;
+    }
+}
+
+@media(max-width:500px){
+    .container{
+        width:92%;
+        padding-top:20px;
+    }
+
+    .stats{
+        gap:8px;
+    }
+
+    .stat{
+        padding:13px 8px;
+    }
+
+    .subjects{
+        grid-template-columns:1fr;
+    }
+
+    .done-button{
+        height:120px;
+        font-size:26px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="decoration d1">🎀</div>
+<div class="decoration d2">♡</div>
+<div class="decoration d3">✦</div>
+<div class="decoration d4">🌸</div>
+<div class="decoration d5">💗</div>
+
+<div class="container">
+
+<header>
+    <div class="logo">🎀 MY LITTLE STUDY SPACE 🎀</div>
+    <h1>Study Bloom 🌷</h1>
+    <div class="subtitle">
+        Every little step counts. Keep blooming! 💕
+    </div>
+</header>
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat">
+        <div class="stat-icon">🌸</div>
+        <div class="stat-number" id="todayTotal">0</div>
+        <div class="stat-label">Today</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-number" id="streak">0</div>
+        <div class="stat-label">Day Streak</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">✨</div>
+        <div class="stat-number" id="allTime">0</div>
+        <div class="stat-label">All Time</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-number" id="goalPercent">0%</div>
+        <div class="stat-label">Goal</div>
+    </div>
+
+</div>
+
+<div class="main-grid">
+
+<!-- SUBJECTS -->
+
+<div class="card">
+
+    <h2 class="section-title">📚 Pick your subject</h2>
+
+    <div class="subjects" id="subjects"></div>
+
+</div>
+
+
+<!-- ACTION -->
+
+<div class="card action-card">
+
+    <div class="selected" id="selectedSubject">
+        🌸 Maths
+    </div>
+
+    <div class="big-count" id="currentCount">
+        0
+    </div>
+
+    <div class="count-label">
+        little wins today ✨
+    </div>
+
+    <button class="done-button" id="doneButton">
+        ✓ CHECKED OFF!
+        <span class="button-small">
+            one more little win 💗
+        </span>
+    </button>
+
+    <div class="goal">
+
+        <div class="goal-row">
+            <span>Today's goal 🎀</span>
+            <span id="goalText">0 / 30</span>
+        </div>
+
+        <div class="progress">
+            <div class="progress-fill" id="goalProgress"></div>
+        </div>
+
+    </div>
+
+    <div class="button-row">
+
+        <button class="small-button" id="undo">
+            ↩ Undo
+        </button>
+
+        <button class="small-button" id="goalButton">
+            🎯 Change Goal
+        </button>
+
+        <button class="small-button" id="soundButton">
+            🔊 Sound
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- BOTTOM -->
+
+<div class="bottom">
+
+<div class="card">
+
+    <h2 class="section-title">
+        🌷 Today's subjects
+    </h2>
+
+    <div id="todaySubjects"></div>
+
+</div>
+
+
+<div class="card">
+
+    <h2 class="section-title">
+        💕 Recent progress
+    </h2>
+
+    <div class="history" id="history"></div>
+
+</div>
+
+</div>
+
+
+<!-- RESET -->
+
+<div class="reset-box">
+
+    <h2 class="section-title">
+        🎀 Reset Today's Progress
+    </h2>
+
+    <p style="font-size:13px;margin-top:-5px;color:#955873;">
+        Reset one subject without touching your past history. 💗
+    </p>
+
+    <div class="reset-buttons" id="resetButtons"></div>
+
+    <button
+        class="small-button"
+        id="resetAll"
+        style="margin-top:12px;background:#ffe1ed;"
+    >
+        🌸 Reset All Subjects Today
+    </button>
+
+</div>
+
+</div>
+
+<div class="toast" id="toast">
+    Another one checked off! 💕
+</div>
+
+
+<script>
+
+const subjects = [
+    "Maths",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "English",
+    "Sanskrit",
+    "Computer"
+];
+
+const emojis = {
+    Maths:"📐",
+    Physics:"⚡",
+    Chemistry:"🧪",
+    Biology:"🧬",
+    English:"📖",
+    Sanskrit:"🪷",
+    Computer:"💻"
+};
+
+let data = JSON.parse(
+    localStorage.getItem("studyBloomData")
+) || {
+    counts:{},
+    history:{},
+    goal:30,
+    streak:0,
+    lastDate:null,
+    sound:true
+};
+
+subjects.forEach(subject=>{
+    if(data.counts[subject] === undefined){
+        data.counts[subject] = 0;
+    }
+});
+
+let selected = "Maths";
+let lastAction = null;
+
+
+/* DATE */
+
+function todayKey(){
+
+    const d = new Date();
+
+    return d.getFullYear() + "-" +
+        String(d.getMonth()+1).padStart(2,"0") + "-" +
+        String(d.getDate()).padStart(2,"0");
+
+}
+
+
+/* SAVE */
+
+function save(){
+
+    localStorage.setItem(
+        "studyBloomData",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* TODAY DATA */
+
+function getToday(){
+
+    const key = todayKey();
+
+    if(!data.history[key]){
+        data.history[key] = {};
+    }
+
+    subjects.forEach(s=>{
+        if(data.history[key][s] === undefined){
+            data.history[key][s] = 0;
+        }
+    });
+
+    return data.history[key];
+
+}
+
+
+/* RENDER SUBJECTS */
+
+function renderSubjects(){
+
+    const box = document.getElementById("subjects");
+
+    box.innerHTML = "";
+
+    const today = getToday();
+
+    subjects.forEach(subject=>{
+
+        const div = document.createElement("div");
+
+        div.className =
+            "subject " +
+            (selected === subject ? "active" : "");
+
+        const count = today[subject];
+
+        const percent =
+            Math.min(
+                100,
+                (count / Math.max(data.goal,1)) * 100
+            );
+
+        div.innerHTML = `
+
+            <div class="subject-top">
+
+                <span class="subject-name">
+                    ${emojis[subject]} ${subject}
+                </span>
+
+                <span class="subject-count">
+                    ${count}
+                </span>
+
+            </div>
+
+            <div class="subject-bar">
+                <div
+                    class="subject-fill"
+                    style="width:${percent}%"
+                ></div>
+            </div>
+        `;
+
+        div.onclick = ()=>{
+
+            selected = subject;
+
+            render();
+
+        };
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* MAIN RENDER */
+
+function render(){
+
+    const today = getToday();
+
+    const current = today[selected];
+
+    document.getElementById("selectedSubject")
+        .textContent =
+        emojis[selected] + " " + selected;
+
+    document.getElementById("currentCount")
+        .textContent = current;
+
+    const total = subjects.reduce(
+        (sum,s)=>sum + today[s],
+        0
+    );
+
+    document.getElementById("todayTotal")
+        .textContent = total;
+
+    document.getElementById("allTime")
+        .textContent =
+        Object.values(data.history)
+        .reduce((total,day)=>
+            total +
+            Object.values(day)
+            .reduce((a,b)=>a+b,0)
+        ,0);
+
+    const percent =
+        Math.min(
+            100,
+            Math.round(
+                (total / Math.max(data.goal,1))*100
+            )
+        );
+
+    document.getElementById("goalPercent")
+        .textContent = percent + "%";
+
+    document.getElementById("goalText")
+        .textContent =
+        total + " / " + data.goal;
+
+    document.getElementById("goalProgress")
+        .style.width = percent + "%";
+
+    renderSubjects();
+
+    renderTodaySubjects();
+
+    renderHistory();
+
+    document.getElementById("streak")
+        .textContent = calculateStreak();
+
+    renderResetButtons();
+
+}
+
+
+/* TODAY SUBJECTS */
+
+function renderTodaySubjects(){
+
+    const box =
+        document.getElementById("todaySubjects");
+
+    const today = getToday();
+
+    box.innerHTML = "";
+
+    subjects.forEach(subject=>{
+
+        const row = document.createElement("div");
+
+        row.style.cssText = `
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:9px 12px;
+            margin-bottom:7px;
+            border-radius:15px;
+            background:#fff0f6;
+            border:1px solid #ffd2e3;
+        `;
+
+        row.innerHTML = `
+
+            <span style="font-weight:700;">
+                ${emojis[subject]} ${subject}
+            </span>
+
+            <span style="
+                font-family:'Baloo 2';
+                font-size:20px;
+                color:#c1497b;
+            ">
+                ${today[subject]}
+            </span>
+        `;
+
+        box.appendChild(row);
+
+    });
+
+}
+
+
+/* HISTORY */
+
+function renderHistory(){
+
+    const box =
+        document.getElementById("history");
+
+    box.innerHTML = "";
+
+    const keys =
+        Object.keys(data.history)
+        .sort()
+        .reverse()
+        .slice(0,10);
+
+    if(keys.length === 0){
+
+        box.innerHTML = `
+            <div style="
+                text-align:center;
+                padding:30px 10px;
+                color:#a66a83;
+            ">
+                Your study journey starts here 🌸
+            </div>
+        `;
+
+        return;
+    }
+
+    keys.forEach(key=>{
+
+        const total =
+            Object.values(data.history[key])
+            .reduce((a,b)=>a+b,0);
+
+        const div =
+            document.createElement("div");
+
+        div.className = "history-item";
+
+        div.innerHTML = `
+
+            <span class="history-date">
+                🌷 ${formatDate(key)}
+            </span>
+
+            <span class="history-number">
+                ${total} ✨
+            </span>
+        `;
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* DATE FORMAT */
+
+function formatDate(key){
+
+    const parts = key.split("-");
+
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+}
+
+
+/* STREAK */
+
+function calculateStreak(){
+
+    let streak = 0;
+
+    let date = new Date();
+
+    while(true){
+
+        const key =
+            date.getFullYear() + "-" +
+            String(date.getMonth()+1).padStart(2,"0") + "-" +
+            String(date.getDate()).padStart(2,"0");
+
+        const day = data.history[key];
+
+        if(!day) break;
+
+        const total =
+            Object.values(day)
+            .reduce((a,b)=>a+b,0);
+
+        if(total === 0) break;
+
+        streak++;
+
+        date.setDate(date.getDate()-1);
+
+    }
+
+    return streak;
+
+}
+
+
+/* CLICK */
+
+document.getElementById("doneButton")
+.onclick = function(event){
+
+    const today = getToday();
+
+    today[selected]++;
+
+    lastAction = selected;
+
+    save();
+
+    updateStreak();
+
+    render();
+
+    showFloat(event);
+
+    sparkleBurst(event);
+
+    showToast();
+
+    if(data.sound){
+        playSound();
+    }
+
+};
+
+
+/* STREAK UPDATE */
+
+function updateStreak(){
+
+    data.lastDate = todayKey();
+
+    save();
+
+}
+
+
+/* FLOATING +1 */
+
+function showFloat(event){
+
+    const el =
+        document.createElement("div");
+
+    el.className = "float";
+
+    el.textContent = "+1 💗";
+
+    el.style.left =
+        (event.clientX - 15) + "px";
+
+    el.style.top =
+        (event.clientY - 20) + "px";
+
+    document.body.appendChild(el);
+
+    setTimeout(()=>{
+        el.remove();
+    },900);
+
+}
+
+
+/* SPARKLES */
+
+function sparkleBurst(event){
+
+    const symbols =
+        ["✦","♡","✧","💕","✿","🎀"];
+
+    for(let i=0;i<7;i++){
+
+        const el =
+            document.createElement("div");
+
+        el.className = "sparkle";
+
+        el.textContent =
+            symbols[
+                Math.floor(
+                    Math.random()*symbols.length
+                )
+            ];
+
+        el.style.left =
+            (event.clientX + (Math.random()*100-50))
+            + "px";
+
+        el.style.top =
+            (event.clientY + (Math.random()*70-35))
+            + "px";
+
+        el.style.color =
+            [
+                "#ff78b5",
+                "#f45d9f",
+                "#ff9fc9",
+                "#d75b91"
+            ][Math.floor(Math.random()*4)];
+
+        document.body.appendChild(el);
+
+        setTimeout(()=>{
+            el.remove();
+        },800);
+
+    }
+
+}
+
+
+/* TOAST */
+
+function showToast(){
+
+    const messages = [
+
+        "Another one checked off! 💕",
+        "You're doing amazing! 🎀",
+        "One step closer! 🌸",
+        "Look at you go! ✨",
+        "Brain power +1! 🧠💗",
+        "Keep blooming! 🌷",
+        "Another little win! 🩷",
+        "YAY! It's checked off! 🎀"
+
+    ];
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        messages[
+            Math.floor(
+                Math.random()*messages.length
+            )
+        ];
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },1200);
+
+}
+
+
+/* SOUND */
+
+function playSound(){
+
+    try{
+
+        const ctx =
+            new AudioContext();
+
+        const oscillator =
+            ctx.createOscillator();
+
+        const gain =
+            ctx.createGain();
+
+        oscillator.type = "sine";
+
+        oscillator.frequency.value = 700;
+
+        gain.gain.setValueAtTime(
+            .05,
+            ctx.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            ctx.currentTime + .12
+        );
+
+        oscillator.connect(gain);
+
+        gain.connect(ctx.destination);
+
+        oscillator.start();
+
+        oscillator.stop(
+            ctx.currentTime + .12
+        );
+
+    }catch(e){}
+
+}
+
+
+/* UNDO */
+
+document.getElementById("undo")
+.onclick = function(){
+
+    const today = getToday();
+
+    if(today[selected] <= 0){
+
+        showToastMessage(
+            "Nothing to undo here 🌸"
+        );
+
+        return;
+
+    }
+
+    today[selected]--;
+
+    save();
+
+    render();
+
+    showToastMessage(
+        "Last one undone 💕"
+    );
+
+};
+
+
+/* GOAL */
+
+document.getElementById("goalButton")
+.onclick = function(){
+
+    const value =
+        prompt(
+            "What's your daily question goal? 🎀",
+            data.goal
+        );
+
+    if(value !== null){
+
+        const goal =
+            parseInt(value);
+
+        if(!isNaN(goal) && goal > 0){
+
+            data.goal = goal;
+
+            save();
+
+            render();
+
+        }
+
+    }
+
+};
+
+
+/* SOUND TOGGLE */
+
+document.getElementById("soundButton")
+.onclick = function(){
+
+    data.sound = !data.sound;
+
+    save();
+
+    document.getElementById("soundButton")
+        .textContent =
+        data.sound
+        ? "🔊 Sound"
+        : "🔇 Sound Off";
+
+};
+
+
+/* TOAST MESSAGE */
+
+function showToastMessage(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },1200);
+
+}
+
+
+/* RESET BUTTONS */
+
+function renderResetButtons(){
+
+    const box =
+        document.getElementById("resetButtons");
+
+    box.innerHTML = "";
+
+    subjects.forEach(subject=>{
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "reset-subject";
+
+        button.textContent =
+            emojis[subject] + " " + subject;
+
+        button.onclick = ()=>{
+
+            if(confirm(
+                `Reset today's ${subject} progress? 💗`
+            )){
+
+                const today = getToday();
+
+                today[subject] = 0;
+
+                save();
+
+                render();
+
+                showToastMessage(
+                    `${subject} is fresh again 🌸`
+                );
+
+            }
+
+        };
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* RESET ALL TODAY */
+
+document.getElementById("resetAll")
+.onclick = function(){
+
+    if(!confirm(
+        "Reset today's progress for ALL subjects? Your past history will stay safe. 💕"
+    )) return;
+
+    const today = getToday();
+
+    subjects.forEach(subject=>{
+        today[subject] = 0;
+    });
+
+    save();
+
+    render();
+
+    showToastMessage(
+        "Today's progress has been reset 🌷"
+    );
+
+};
+
+
+/* SPACEBAR */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.code === "Space" &&
+            document.activeElement.tagName !== "INPUT"
+        ){
+
+            event.preventDefault();
+
+            document.getElementById("doneButton")
+                .click();
+
+        }
+
+    }
+);
+
+
+/* START */
+
+render();
+
+</script>
+
+</body>
+</html>
